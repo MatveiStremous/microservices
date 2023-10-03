@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "3b3014b3-b7f4-4336-b0de-3a104500bc3b",
+		"name": "TestRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21067816"
+	},
+	"item": [
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8765/books"
+					},
+					"response": []
+				},
+				{
+					"name": "addNew",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"isbn\": \"978-0-553-21311-0\",\r\n  \"title\": \"The Hobbit\",\r\n  \"genre\": \"FANTASY\",\r\n  \"description\": \"The Hobbit is a fantasy novel by J.R.R. Tolkien.\",\r\n  \"author\": \"J.R.R. Tolkien\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8765/books"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8765/books/3"
+					},
+					"response": []
+				},
+				{
+					"name": "updateById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"isbn\": \"978-0-553-21311-0\",\r\n  \"title\": \"The Hobbit2\",\r\n  \"genre\": \"FANTASY\",\r\n  \"description\": \"The Hobbit is a fantasy novel by J.R.R. Tolkien.\",\r\n  \"author\": \"J.R.R. Tolkien\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8765/books/4"
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8765/books/4"
+					},
+					"response": []
+				},
+				{
+					"name": "getByIsbn",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8765/books/isbn/978-0-553-21311-0"
+					},
+					"response": []
+				},
+				{
+					"name": "takeBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNb2RzZW4iLCJsb2dpbiI6Ik1hdHRoZXciLCJleHAiOjE2OTYzMTY4NDAsImlhdCI6MTY5NjMxNTA0MH0.RbHP2Ae7jx8JpseyDgiyuLyc1QM92jRS_7z-DdmhS60"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8765/books/take/3"
+					},
+					"response": []
+				},
+				{
+					"name": "returnBook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNb2RzZW4iLCJsb2dpbiI6Ik1hdHRoZXciLCJleHAiOjE2OTYzMTY4NDAsImlhdCI6MTY5NjMxNTA0MH0.RbHP2Ae7jx8JpseyDgiyuLyc1QM92jRS_7z-DdmhS60"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8765/books/return/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"Matthew22\",\r\n    \"password\": \"1111\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8765/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"Matthew\",\r\n    \"password\": \"1111\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8765/auth/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
