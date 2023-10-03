@@ -7,6 +7,10 @@ import com.example.authservice.model.User;
 import com.example.authservice.security.JWTUtil;
 import com.example.authservice.service.AuthService;
 import com.example.authservice.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
+@ApiResponse(responseCode = "200", description = "Successful operation")
 public class AuthController {
     private final AuthService authService;
     private final JWTUtil jwtUtil;
@@ -35,7 +40,10 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody AuthDTO authDTO) {
+    @Operation(summary = "User login", description = "Authenticate a user and generate a JWT token")
+    @ApiResponse(responseCode = "403", description = "Wrong login or password")
+    public ResponseEntity<Map<String, String>> login(@RequestBody
+                                                     @Parameter(description = "User login credentials", in = ParameterIn.DEFAULT) AuthDTO authDTO) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authDTO.getLogin(), authDTO.getPassword());
 
         authenticationManager.authenticate(authToken);
@@ -50,7 +58,10 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> register(@RequestBody SignUpDTO signUpDTO) {
+    @Operation(summary = "User registration", description = "Register a new user")
+    @ApiResponse(responseCode = "409", description = "This login is already registered")
+    public ResponseEntity<String> register(@RequestBody
+                                           @Parameter(description = "User registration data", in = ParameterIn.DEFAULT) SignUpDTO signUpDTO) {
         authService.signup(User.builder()
                 .login(signUpDTO.getLogin())
                 .password(signUpDTO.getPassword())
