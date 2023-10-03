@@ -1,6 +1,8 @@
 server:
   port: 8080
 
+library_service_uri: http://localhost:8081/library
+
 spring:
   application:
     name: book-service

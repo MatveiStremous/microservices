@@ -46,4 +46,14 @@ public class BookController {
     public void deleteById(@PathVariable("id") Long id) {
         bookService.deleteById(id);
     }
+
+    @PostMapping("/take/{bookId}")
+    public void takeBook(@PathVariable Long bookId) {
+        bookService.takeBook(bookId);
+    }
+
+    @PostMapping("/return/{bookId}")
+    public void returnBook(@PathVariable Long bookId) {
+        bookService.returnBook(bookId);
+    }
 }
