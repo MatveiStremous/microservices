@@ -1,7 +1,7 @@
 server:
   port: 8080
 
-library_service_uri: http://localhost:8081/library
+library_service_uri: ${LIBRARY_SERVICE_URL:http://localhost:8081/library}
 
 spring:
   application:
