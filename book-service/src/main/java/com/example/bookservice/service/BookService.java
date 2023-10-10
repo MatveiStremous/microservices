@@ -4,6 +4,7 @@ import com.example.bookservice.dto.BookDTO;
 import com.example.bookservice.exception.BookNotFoundException;
 import com.example.bookservice.model.Book;
 import com.example.bookservice.repository.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
@@ -20,12 +22,6 @@ public class BookService {
 
     @Value("${library_service_uri}")
     private String libraryServiceURI;
-
-    public BookService(ModelMapper modelMapper, BookRepository bookRepository, RestTemplate restTemplate) {
-        this.modelMapper = modelMapper;
-        this.bookRepository = bookRepository;
-        this.restTemplate = restTemplate;
-    }
 
     public List<Book> getAll() {
         return bookRepository.findAll();

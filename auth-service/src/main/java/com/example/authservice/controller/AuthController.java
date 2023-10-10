@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,19 +25,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("auth")
 @ApiResponse(responseCode = "200", description = "Successful operation")
+@RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
-
-    @Autowired
-    public AuthController(AuthService authService, JWTUtil jwtUtil, AuthenticationManager authenticationManager, UserService userService) {
-        this.authService = authService;
-        this.jwtUtil = jwtUtil;
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
-    }
 
     @PostMapping("/login")
     @Operation(summary = "User login", description = "Authenticate a user and generate a JWT token")

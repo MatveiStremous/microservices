@@ -3,6 +3,7 @@ package com.example.libraryservice.service;
 import com.example.libraryservice.exception.BusinessException;
 import com.example.libraryservice.model.Record;
 import com.example.libraryservice.repository.LibraryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class LibraryService {
     public final LibraryRepository libraryRepository;
-
-    public LibraryService(LibraryRepository libraryRepository) {
-        this.libraryRepository = libraryRepository;
-    }
 
     private boolean isBookFree(Long bookId) {
         Optional<Record> record = libraryRepository.findTopByBookIdOrderByEndDateDesc(bookId);
@@ -38,10 +36,10 @@ public class LibraryService {
     public void returnBook(Long bookId) {
         Optional<Record> record = libraryRepository.findTopByBookIdOrderByEndDateDesc(bookId);
         if (record.isPresent()) {
-            if(record.get().getReturnDate() == null) {
+            if (record.get().getReturnDate() == null) {
                 record.get().setReturnDate(LocalDate.now());
                 libraryRepository.save(record.get());
-            }else{
+            } else {
                 throw new BusinessException(HttpStatus.CONFLICT, "This book has already been returned.");
             }
         } else {

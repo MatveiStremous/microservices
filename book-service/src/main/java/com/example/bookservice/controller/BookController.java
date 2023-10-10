@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +17,9 @@ import java.util.List;
 @RequestMapping("books")
 @ApiResponse(responseCode = "401", description = "Authentication failed")
 @ApiResponse(responseCode = "200", description = "Successful operation")
+@RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @GetMapping
     @Operation(summary = "Get all books", description = "Returns a list of books")

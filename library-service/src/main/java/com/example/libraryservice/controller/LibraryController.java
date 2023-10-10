@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("library")
 @ApiResponse(responseCode = "200", description = "Successful operation")
+@RequiredArgsConstructor
 public class LibraryController {
-
     private final LibraryService libraryService;
-
-    public LibraryController(LibraryService libraryService) {
-        this.libraryService = libraryService;
-    }
 
     @PostMapping("/take/{bookId}")
     @Operation(summary = "Take a book", description = "Take a book from library")
