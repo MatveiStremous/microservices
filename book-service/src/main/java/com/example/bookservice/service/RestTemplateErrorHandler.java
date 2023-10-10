@@ -1,5 +1,7 @@
-package com.example.bookservice.exception;
+package com.example.bookservice.service;
 
+import com.example.bookservice.dto.ErrorResponse;
+import com.example.bookservice.exception.BusinessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

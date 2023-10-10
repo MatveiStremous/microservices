@@ -14,12 +14,12 @@ public class JWTUtil {
     @Value("${jwt_access_secret}")
     private String accessSecret;
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(String login) {
         Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(30).toInstant());
 
         return JWT.create()
                 .withSubject("User details")
-                .withClaim("login", user.getLogin())
+                .withClaim("login", login)
                 .withIssuedAt(new Date())
                 .withIssuer("Matthew")
                 .withExpiresAt(expirationDate)

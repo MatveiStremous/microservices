@@ -12,14 +12,12 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User findByLogin(String login) {
-        Optional<User> foundUser = userRepository.findByLogin(login);
-        return foundUser.orElse(null);
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
-
 }
 

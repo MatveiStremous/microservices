@@ -1,11 +1,14 @@
-package com.example.bookservice.exception;
+package com.example.bookservice.controller;
 
+import com.example.bookservice.dto.ErrorResponse;
+import com.example.bookservice.exception.BookNotFoundException;
+import com.example.bookservice.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class MyExceptionHandler {
+public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ErrorResponse> businessException(BusinessException exception) {
         return ResponseEntity
