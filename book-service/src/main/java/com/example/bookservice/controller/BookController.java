@@ -1,14 +1,13 @@
 package com.example.bookservice.controller;
 
-import com.example.bookservice.dto.BookDTO;
-import com.example.bookservice.model.Book;
+import com.example.bookservice.dto.BookRequest;
+import com.example.bookservice.dto.BookResponse;
 import com.example.bookservice.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,40 +22,40 @@ public class BookController {
 
     @GetMapping
     @Operation(summary = "Get all books", description = "Returns a list of books")
-    public List<Book> getAll() {
+    public List<BookResponse> getAll() {
         return bookService.getAll();
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a book by ID", description = "Returns a book by its ID")
     @ApiResponse(responseCode = "400", description = "This book doesn't exist")
-    public ResponseEntity<Book> getById(@PathVariable("id")
-                                        @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long id) {
-        return ResponseEntity.ok().body(bookService.getById(id));
+    public BookResponse getById(@PathVariable("id")
+                                @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long id) {
+        return bookService.getById(id);
     }
 
     @GetMapping("/isbn/{isbn}")
-    @Operation(summary = "Get books by ISBN", description = "Returns a list of books with the specified ISBN")
-    public List<Book> getByIsbn(@PathVariable("isbn")
-                                @Parameter(description = "ISBN of the book", in = ParameterIn.PATH) String isbn) {
-        return bookService.getAllByIsbn(isbn);
+    @Operation(summary = "Get a book by ISBN", description = "Returns a books by its ISBN")
+    public BookResponse getByIsbn(@PathVariable("isbn")
+                                  @Parameter(description = "ISBN of the book", in = ParameterIn.PATH) String isbn) {
+        return bookService.getByIsbn(isbn);
     }
 
     @PostMapping
     @Operation(summary = "Add a new book", description = "Adds a new book to the library")
-    public void addNewBook(@RequestBody
-                           @Parameter(description = "Book data", in = ParameterIn.DEFAULT) BookDTO bookDTO) {
-        bookService.addNewBook(bookDTO);
+    public BookResponse addNewBook(@RequestBody
+                                   @Parameter(description = "Book data", in = ParameterIn.DEFAULT) BookRequest bookRequest) {
+        return bookService.addNewBook(bookRequest);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a book by ID", description = "Updates a book's information by its ID")
     @ApiResponse(responseCode = "400", description = "This book doesn't exist")
-    public void updateById(@PathVariable("id")
-                           @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long id,
-                           @RequestBody
-                           @Parameter(description = "Updated book data", in = ParameterIn.DEFAULT) BookDTO bookDTO) {
-        bookService.update(id, bookDTO);
+    public BookResponse updateById(@PathVariable("id")
+                                   @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long id,
+                                   @RequestBody
+                                   @Parameter(description = "Updated book data", in = ParameterIn.DEFAULT) BookRequest bookRequest) {
+        return bookService.updateById(id, bookRequest);
     }
 
     @DeleteMapping("/{id}")

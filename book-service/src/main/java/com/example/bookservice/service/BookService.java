@@ -1,7 +1,9 @@
 package com.example.bookservice.service;
 
-import com.example.bookservice.dto.BookDTO;
+import com.example.bookservice.dto.BookRequest;
+import com.example.bookservice.dto.BookResponse;
 import com.example.bookservice.exception.BookNotFoundException;
+import com.example.bookservice.exception.BusinessException;
 import com.example.bookservice.model.Book;
 import com.example.bookservice.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,39 +26,50 @@ public class BookService {
     @Value("${library_service_uri}")
     private String libraryServiceURI;
 
-    public List<Book> getAll() {
-        return bookRepository.findAll();
+    public List<BookResponse> getAll() {
+        return bookRepository.findAll()
+                .stream()
+                .map(x -> modelMapper.map(x, BookResponse.class))
+                .collect(Collectors.toList());
     }
 
-    public Book getById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+    public BookResponse getById(Long id) {
+        Book foundBook = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+        return modelMapper.map(foundBook, BookResponse.class);
     }
 
-    public List<Book> getAllByIsbn(String isbn) {
-        return bookRepository.findAllByIsbn(isbn);
+    public BookResponse getByIsbn(String isbn) {
+        Book foundBook = bookRepository.findByIsbn(isbn)
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+        return modelMapper.map(foundBook, BookResponse.class);
     }
 
-    public void addNewBook(BookDTO bookDTO) {
-        Book book = modelMapper.map(bookDTO, Book.class);
-        bookRepository.save(book);
+    public BookResponse addNewBook(BookRequest bookRequest) {
+        Book book = modelMapper.map(bookRequest, Book.class);
+        if (isBookExist(book.getIsbn())) {
+            throw new BusinessException(HttpStatus.CONFLICT, "Book with this isbn already exists.");
+        }
+        return modelMapper.map(bookRepository.save(book), BookResponse.class);
     }
 
     public void deleteById(Long id) {
-        if (isBookExist(id)) {
-            bookRepository.deleteById(id);
-        } else {
+        if (!isBookExist(id)) {
             throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
         }
+        bookRepository.deleteById(id);
     }
 
-    public void update(Long id, BookDTO bookDTO) {
-        if (isBookExist(id)) {
-            Book book = modelMapper.map(bookDTO, Book.class);
-            book.setId(id);
-            bookRepository.save(book);
-        } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
+    public BookResponse updateById(Long id, BookRequest bookRequest) {
+        Book existingBook = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+
+        if (!existingBook.getIsbn().equals(bookRequest.getIsbn()) && isBookExist(bookRequest.getIsbn())) {
+            throw new BusinessException(HttpStatus.CONFLICT, "Book with this isbn already exists.");
         }
+        Book updatedBook = modelMapper.map(bookRequest, Book.class);
+        updatedBook.setId(id);
+        return modelMapper.map(bookRepository.save(updatedBook), BookResponse.class);
     }
 
     public void takeBook(Long bookId) {
@@ -78,5 +92,9 @@ public class BookService {
 
     private boolean isBookExist(Long bookId) {
         return bookRepository.findById(bookId).isPresent();
+    }
+
+    private boolean isBookExist(String isbn) {
+        return bookRepository.findByIsbn(isbn).isPresent();
     }
 }
