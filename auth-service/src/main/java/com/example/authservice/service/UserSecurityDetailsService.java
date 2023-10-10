@@ -15,12 +15,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserSecurityDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final String USER_NOT_FOUND = "User not found!";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByLogin(username);
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User not found!");
+            throw new UsernameNotFoundException(USER_NOT_FOUND);
         }
         return new UserSecurityDetails(user.get());
     }

@@ -14,6 +14,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LibraryService {
     public final LibraryRepository libraryRepository;
+    private final Integer BOOK_ISSUED_DAYS_NUMBER = 30;
+    private final String BOOK_UNAVAILABLE_NOW = "This book is unavailable now.";
+    private final String BOOK_WASNT_TAKEN = "This book wasn't taken.";
+    private final String BOOK_ALREADY_RETURNED = "This book has already been returned.";
 
     private boolean isBookFree(Long bookId) {
         Optional<Record> record = libraryRepository.findTopByBookIdOrderByEndDateDesc(bookId);
@@ -25,11 +29,11 @@ public class LibraryService {
             Record record = Record.builder()
                     .bookId(bookId)
                     .startDate(LocalDate.now())
-                    .endDate(LocalDate.now().plusMonths(1))
+                    .endDate(LocalDate.now().plusDays(BOOK_ISSUED_DAYS_NUMBER))
                     .build();
             libraryRepository.save(record);
         } else {
-            throw new BusinessException(HttpStatus.CONFLICT, "This book is unavailable now.");
+            throw new BusinessException(HttpStatus.CONFLICT, BOOK_UNAVAILABLE_NOW);
         }
     }
 
@@ -40,10 +44,10 @@ public class LibraryService {
                 record.get().setReturnDate(LocalDate.now());
                 libraryRepository.save(record.get());
             } else {
-                throw new BusinessException(HttpStatus.CONFLICT, "This book has already been returned.");
+                throw new BusinessException(HttpStatus.CONFLICT, BOOK_ALREADY_RETURNED);
             }
         } else {
-            throw new BusinessException(HttpStatus.CONFLICT, "This book wasn't taken.");
+            throw new BusinessException(HttpStatus.CONFLICT, BOOK_WASNT_TAKEN);
         }
     }
 }

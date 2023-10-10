@@ -12,10 +12,11 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class UserSecurityDetails implements UserDetails {
     private final User user;
+    private final String DEFAULT_ROLE = "ROLE_USER";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
     }
 
     @Override

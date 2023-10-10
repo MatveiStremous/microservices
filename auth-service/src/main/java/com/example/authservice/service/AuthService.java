@@ -22,6 +22,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final String LOGIN_ALREADY_REGISTERED = "This login is already registered.";
+    private final String WRONG_LOGIN_OR_PASSWORD = "Wrong login or password.";
 
     public AuthResponse signup(User user) {
         Optional<User> userFromDB = userService.findByLogin(user.getLogin());
@@ -31,7 +33,7 @@ public class AuthService {
             String token = jwtUtil.generateAccessToken(savedUser.getLogin());
             return new AuthResponse(savedUser.getLogin(), token);
         } else {
-            throw new BusinessException(HttpStatus.CONFLICT, "This login is already registered.");
+            throw new BusinessException(HttpStatus.CONFLICT, LOGIN_ALREADY_REGISTERED);
         }
     }
 
@@ -41,7 +43,7 @@ public class AuthService {
         try {
             authenticationManager.authenticate(authToken);
         } catch (BadCredentialsException e) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "Wrong login or password.");
+            throw new BusinessException(HttpStatus.BAD_REQUEST, WRONG_LOGIN_OR_PASSWORD);
         }
 
         String token = jwtUtil.generateAccessToken(login);

@@ -22,6 +22,10 @@ public class BookService {
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
     private final RestTemplate restTemplate;
+    private final String BOOK_DOESNT_EXIST = "This book doesn't exist.";
+    private final String BOOK_WITH_THIS_ISBN_ALREADY_EXISTS = "Book with this isbn already exists.";
+    private final String TAKE_BOOK_URL = "/take/{id}";
+    private final String RETURN_BOOK_URL = "/return/{id}";
 
     @Value("${library_service_uri}")
     private String libraryServiceURI;
@@ -35,37 +39,37 @@ public class BookService {
 
     public BookResponse getById(Long id) {
         Book foundBook = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST));
         return modelMapper.map(foundBook, BookResponse.class);
     }
 
     public BookResponse getByIsbn(String isbn) {
         Book foundBook = bookRepository.findByIsbn(isbn)
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST));
         return modelMapper.map(foundBook, BookResponse.class);
     }
 
     public BookResponse addNewBook(BookRequest bookRequest) {
         Book book = modelMapper.map(bookRequest, Book.class);
         if (isBookExist(book.getIsbn())) {
-            throw new BusinessException(HttpStatus.CONFLICT, "Book with this isbn already exists.");
+            throw new BusinessException(HttpStatus.CONFLICT, BOOK_WITH_THIS_ISBN_ALREADY_EXISTS);
         }
         return modelMapper.map(bookRepository.save(book), BookResponse.class);
     }
 
     public void deleteById(Long id) {
         if (!isBookExist(id)) {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
+            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST);
         }
         bookRepository.deleteById(id);
     }
 
     public BookResponse updateById(Long id, BookRequest bookRequest) {
         Book existingBook = bookRepository.findById(id)
-                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
+                .orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST));
 
         if (!existingBook.getIsbn().equals(bookRequest.getIsbn()) && isBookExist(bookRequest.getIsbn())) {
-            throw new BusinessException(HttpStatus.CONFLICT, "Book with this isbn already exists.");
+            throw new BusinessException(HttpStatus.CONFLICT, BOOK_WITH_THIS_ISBN_ALREADY_EXISTS);
         }
         Book updatedBook = modelMapper.map(bookRequest, Book.class);
         updatedBook.setId(id);
@@ -74,19 +78,19 @@ public class BookService {
 
     public void takeBook(Long bookId) {
         if (isBookExist(bookId)) {
-            String uri = libraryServiceURI + "/take/{id}";
+            String uri = libraryServiceURI + TAKE_BOOK_URL;
             restTemplate.postForEntity(uri, null, String.class, bookId);
         } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
+            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST);
         }
     }
 
     public void returnBook(Long bookId) {
         if (isBookExist(bookId)) {
-            String uri = libraryServiceURI + "/return/{id}";
+            String uri = libraryServiceURI + RETURN_BOOK_URL;
             restTemplate.postForEntity(uri, null, String.class, bookId);
         } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
+            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST);
         }
     }
 
