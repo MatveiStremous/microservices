@@ -28,7 +28,8 @@ public class AuthService {
         if (userFromDB.isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userService.save(user);
-            return login(savedUser.getLogin(), savedUser.getPassword());
+            String token = jwtUtil.generateAccessToken(savedUser.getLogin());
+            return new AuthResponse(savedUser.getLogin(), token);
         } else {
             throw new BusinessException(HttpStatus.CONFLICT, "This login is already registered.");
         }
