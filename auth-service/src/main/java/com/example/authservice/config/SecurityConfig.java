@@ -1,6 +1,6 @@
 package com.example.authservice.config;
 
-import com.example.authservice.service.UserSecurityDetailsService;
+import com.example.authservice.service.impl.UserSecurityDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

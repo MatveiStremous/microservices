@@ -1,4 +1,4 @@
-package com.example.authservice.service;
+package com.example.authservice.service.impl;
 
 import com.example.authservice.model.User;
 import com.example.authservice.repository.UserRepository;
