@@ -76,10 +76,11 @@ public class BookService {
         return modelMapper.map(bookRepository.save(updatedBook), BookResponse.class);
     }
 
-    public void takeBook(Long bookId) {
+    public BookResponse takeBook(Long bookId) {
         if (isBookExist(bookId)) {
             String uri = libraryServiceURI + TAKE_BOOK_URL;
             restTemplate.postForEntity(uri, null, String.class, bookId);
+            return getById(bookId);
         } else {
             throw new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST);
         }

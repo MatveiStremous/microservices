@@ -26,23 +26,23 @@ public class LibraryService {
 
     public void takeBook(Long bookId) {
         if (isBookFree(bookId)) {
-            Record record = Record.builder()
+            Record newRecord = Record.builder()
                     .bookId(bookId)
                     .startDate(LocalDate.now())
                     .endDate(LocalDate.now().plusDays(BOOK_ISSUED_DAYS_NUMBER))
                     .build();
-            libraryRepository.save(record);
+            libraryRepository.save(newRecord);
         } else {
             throw new BusinessException(HttpStatus.CONFLICT, BOOK_UNAVAILABLE_NOW);
         }
     }
 
     public void returnBook(Long bookId) {
-        Optional<Record> record = libraryRepository.findTopByBookIdOrderByEndDateDesc(bookId);
-        if (record.isPresent()) {
-            if (record.get().getReturnDate() == null) {
-                record.get().setReturnDate(LocalDate.now());
-                libraryRepository.save(record.get());
+        Optional<Record> existingRecord = libraryRepository.findTopByBookIdOrderByEndDateDesc(bookId);
+        if (existingRecord.isPresent()) {
+            if (existingRecord.get().getReturnDate() == null) {
+                existingRecord.get().setReturnDate(LocalDate.now());
+                libraryRepository.save(existingRecord.get());
             } else {
                 throw new BusinessException(HttpStatus.CONFLICT, BOOK_ALREADY_RETURNED);
             }

@@ -70,9 +70,9 @@ public class BookController {
     @Operation(summary = "Take a book", description = "Take a book from library (request to library service)")
     @ApiResponse(responseCode = "400", description = "This book doesn't exist")
     @ApiResponse(responseCode = "409", description = "This book is unavailable now")
-    public void takeBook(@PathVariable
-                         @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long bookId) {
-        bookService.takeBook(bookId);
+    public BookResponse takeBook(@PathVariable
+                                 @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long bookId) {
+        return bookService.takeBook(bookId);
     }
 
     @PostMapping("/return/{bookId}")
