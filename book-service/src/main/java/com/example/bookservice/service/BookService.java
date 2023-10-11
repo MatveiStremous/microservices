@@ -21,4 +21,6 @@ public interface BookService {
     BookResponse takeBook(Long bookId);
 
     void returnBook(Long bookId);
+
+    List<BookResponse> getFreeBooks();
 }

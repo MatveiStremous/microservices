@@ -10,7 +10,10 @@ import com.example.bookservice.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +30,7 @@ public class BookServiceImpl implements BookService {
     private final String BOOK_WITH_THIS_ISBN_ALREADY_EXISTS = "Book with this isbn already exists.";
     private final String TAKE_BOOK_URL = "/take/{id}";
     private final String RETURN_BOOK_URL = "/return/{id}";
+    private final String GET_BORROWED_BOOKS_URL = "/borrowed";
 
     @Value("${library_service_uri}")
     private String libraryServiceURI;
@@ -94,6 +98,25 @@ public class BookServiceImpl implements BookService {
         } else {
             throw new BookNotFoundException(HttpStatus.BAD_REQUEST, BOOK_DOESNT_EXIST);
         }
+    }
+
+    public List<BookResponse> getFreeBooks() {
+        String uri = libraryServiceURI + GET_BORROWED_BOOKS_URL;
+        ResponseEntity<List<Long>> response = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+        List<Long> borrowedBooksIds = response.getBody();
+        if (borrowedBooksIds == null || borrowedBooksIds.isEmpty()) {
+            return getAll();
+        }
+        return getAll().stream()
+                .filter(bookResponse -> !borrowedBooksIds.contains(bookResponse.getId()))
+                .collect(Collectors.toList());
     }
 
     private boolean isBookExist(Long bookId) {

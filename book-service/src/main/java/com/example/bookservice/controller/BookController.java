@@ -83,4 +83,10 @@ public class BookController {
                            @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long bookId) {
         bookService.returnBook(bookId);
     }
+
+    @GetMapping("/free")
+    @Operation(summary = "Return list of free books", description = "Return list of books which are free.")
+    public List<BookResponse> getFreeBooks() {
+        return bookService.getFreeBooks();
+    }
 }

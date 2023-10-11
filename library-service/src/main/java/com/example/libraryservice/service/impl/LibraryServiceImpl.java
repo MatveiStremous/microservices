@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +52,12 @@ public class LibraryServiceImpl implements LibraryService {
         } else {
             throw new BusinessException(HttpStatus.CONFLICT, BOOK_WASNT_TAKEN);
         }
+    }
+
+    public List<Long> getBorrowedBooks() {
+        return libraryRepository.findByReturnDateIsNull()
+                .stream()
+                .map(Record::getBookId)
+                .collect(Collectors.toList());
     }
 }

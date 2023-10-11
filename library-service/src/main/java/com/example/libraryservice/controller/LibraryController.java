@@ -6,10 +6,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("library")
@@ -32,5 +31,11 @@ public class LibraryController {
     public void returnBook(@PathVariable
                            @Parameter(description = "ID of the book", in = ParameterIn.PATH) Long bookId) {
         libraryService.returnBook(bookId);
+    }
+
+    @GetMapping("/borrowed")
+    @Operation(summary = "Return list of borrowed books", description = "Return list of books which are borrowed.")
+    public List<Long> getBorrowedBooks() {
+        return libraryService.getBorrowedBooks();
     }
 }
