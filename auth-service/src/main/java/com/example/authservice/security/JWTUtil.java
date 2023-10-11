@@ -12,13 +12,16 @@ import java.util.Date;
 public class JWTUtil {
     @Value("${jwt_access_secret}")
     private String accessSecret;
-    @Value("{token_lifetime_in_minutes}")
+    @Value("${token_lifetime_in_minutes}")
     private Integer TOKEN_LIFETIME_IN_MINUTES;
     private final String SUBJECT = "User details";
     private final String ISSUER = "Matthew";
 
     public String generateAccessToken(String login) {
-        Date expirationDate = Date.from(ZonedDateTime.now().plusMinutes(TOKEN_LIFETIME_IN_MINUTES).toInstant());
+        Date expirationDate = Date.from(ZonedDateTime
+                .now()
+                .plusMinutes(TOKEN_LIFETIME_IN_MINUTES)
+                .toInstant());
 
         return JWT.create()
                 .withSubject(SUBJECT)
