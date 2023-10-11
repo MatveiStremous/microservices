@@ -1,6 +1,6 @@
 package com.example.bookservice.config;
 
-import com.example.bookservice.exception.RestTemplateErrorHandler;
+import com.example.bookservice.service.RestTemplateErrorHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

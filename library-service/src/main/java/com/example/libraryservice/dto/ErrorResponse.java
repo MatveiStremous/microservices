@@ -1,4 +1,4 @@
-package com.example.authservice.exception;
+package com.example.libraryservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

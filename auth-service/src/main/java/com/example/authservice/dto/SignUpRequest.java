@@ -3,10 +3,9 @@ package com.example.authservice.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class AuthDTO {
+@Setter
+public class SignUpRequest {
     private String login;
     private String password;
 }
-

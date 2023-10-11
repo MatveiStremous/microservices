@@ -1,4 +1,4 @@
-package com.example.bookservice.exception;
+package com.example.bookservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

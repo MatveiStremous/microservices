@@ -19,3 +19,4 @@ spring:
       ddl-auto: update
 
 jwt_access_secret: SECRET
+token_lifetime_in_minutes: 30

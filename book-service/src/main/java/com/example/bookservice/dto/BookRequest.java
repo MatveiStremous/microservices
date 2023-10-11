@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDTO {
+public class BookRequest {
     private String isbn;
     private String title;
     private Genre genre;

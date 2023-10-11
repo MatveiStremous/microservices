@@ -1,23 +1,18 @@
-package com.example.bookservice.model;
+package com.example.bookservice.dto;
 
-import jakarta.persistence.*;
+import com.example.bookservice.model.Genre;
 import lombok.*;
 
-@Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookResponse {
     private Long id;
-    @Column(nullable = false, unique = true)
     private String isbn;
     private String title;
     private Genre genre;
-    @Column(length = 1000)
     private String description;
     private String author;
 }

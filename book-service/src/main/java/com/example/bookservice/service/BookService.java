@@ -1,86 +1,26 @@
 package com.example.bookservice.service;
 
-import com.example.bookservice.dto.BookDTO;
-import com.example.bookservice.exception.BookNotFoundException;
-import com.example.bookservice.model.Book;
-import com.example.bookservice.repository.BookRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import com.example.bookservice.dto.BookRequest;
+import com.example.bookservice.dto.BookResponse;
 
 import java.util.List;
 
-@Service
-public class BookService {
-    private final ModelMapper modelMapper;
-    private final BookRepository bookRepository;
-    private final RestTemplate restTemplate;
+public interface BookService {
+    List<BookResponse> getAll();
 
-    @Value("${library_service_uri}")
-    private String libraryServiceURI;
+    BookResponse getById(Long id);
 
-    public BookService(ModelMapper modelMapper, BookRepository bookRepository, RestTemplate restTemplate) {
-        this.modelMapper = modelMapper;
-        this.bookRepository = bookRepository;
-        this.restTemplate = restTemplate;
-    }
+    BookResponse getByIsbn(String isbn);
 
-    public List<Book> getAll() {
-        return bookRepository.findAll();
-    }
+    BookResponse addNewBook(BookRequest bookRequest);
 
-    public Book getById(Long id) {
-        return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist."));
-    }
+    void deleteById(Long id);
 
-    public List<Book> getAllByIsbn(String isbn) {
-        return bookRepository.findAllByIsbn(isbn);
-    }
+    BookResponse updateById(Long id, BookRequest bookRequest);
 
-    public void addNewBook(BookDTO bookDTO) {
-        Book book = modelMapper.map(bookDTO, Book.class);
-        bookRepository.save(book);
-    }
+    BookResponse takeBook(Long bookId);
 
-    public void deleteById(Long id) {
-        if (isBookExist(id)) {
-            bookRepository.deleteById(id);
-        } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
-        }
-    }
+    void returnBook(Long bookId);
 
-    public void update(Long id, BookDTO bookDTO) {
-        if (isBookExist(id)) {
-            Book book = modelMapper.map(bookDTO, Book.class);
-            book.setId(id);
-            bookRepository.save(book);
-        } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
-        }
-    }
-
-    public void takeBook(Long bookId) {
-        if (isBookExist(bookId)) {
-            String uri = libraryServiceURI + "/take/{id}";
-            restTemplate.postForEntity(uri, null, String.class, bookId);
-        } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
-        }
-    }
-
-    public void returnBook(Long bookId) {
-        if (isBookExist(bookId)) {
-            String uri = libraryServiceURI + "/return/{id}";
-            restTemplate.postForEntity(uri, null, String.class, bookId);
-        } else {
-            throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "This book doesn't exist.");
-        }
-    }
-
-    private boolean isBookExist(Long bookId) {
-        return bookRepository.findById(bookId).isPresent();
-    }
+    List<BookResponse> getFreeBooks();
 }

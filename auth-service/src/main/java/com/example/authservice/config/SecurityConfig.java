@@ -1,7 +1,7 @@
 package com.example.authservice.config;
 
-import com.example.authservice.service.UserSecurityDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.authservice.service.impl.UserSecurityDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,13 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final UserSecurityDetailsService userSecurityDetailsService;
-
-    @Autowired
-    public SecurityConfig(UserSecurityDetailsService userSecurityDetailsService) {
-        this.userSecurityDetailsService = userSecurityDetailsService;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,7 +27,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/auth/login", "/auth/signup").permitAll()
-                        .anyRequest().permitAll());
+                        .anyRequest().authenticated());
         return http.build();
     }
 

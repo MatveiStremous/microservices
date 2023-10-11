@@ -1,18 +1,18 @@
-package com.example.bookservice.exception;
+package com.example.bookservice.service;
 
+import com.example.bookservice.dto.ErrorResponse;
+import com.example.bookservice.exception.BusinessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 
 import java.io.IOException;
 
+@RequiredArgsConstructor
 public class RestTemplateErrorHandler implements ResponseErrorHandler {
     private final ObjectMapper objectMapper;
-
-    public RestTemplateErrorHandler(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
