@@ -15,7 +15,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDE4ODA4LCJpYXQiOjE2OTcwMTcwMDh9.PnYJ8aW9u8W8avYcjePBiApCsMlS53xmBY7aDdGx_qA"
 							}
 						},
 						"method": "GET",
@@ -30,14 +30,14 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDEwOTcwLCJpYXQiOjE2OTcwMDkxNzB9.hHbQOmJ7ksSSrIyp1ykBDFkqQo0R_Lq0NM3i6Vd0u9o"
 							}
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"isbn\": \"978-0-553-21311-0\",\r\n  \"title\": \"The Hobbit\",\r\n  \"genre\": \"FANTASY\",\r\n  \"description\": \"The Hobbit is a fantasy novel by J.R.R. Tolkien.\",\r\n  \"author\": \"J.R.R. Tolkien\"\r\n}",
+							"raw": "{\r\n  \"isbn\": \"978-0-553-21311-00\",\r\n  \"title\": \"The Hobbit\",\r\n  \"genre\": \"FANTASY\",\r\n  \"description\": \"The Hobbit is a fantasy novel by J.R.R. Tolkien.\",\r\n  \"author\": \"J.R.R. Tolkien\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,12 +54,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2OTY2OTc3LCJpYXQiOjE2OTY5NjUxNzd9._MkYWMCQhHV7jyXhL7lwunWRhI6QfVjKow0xkzO_U_A"
 							}
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": "http://localhost:8765/books/3"
+						"url": "http://localhost:8765/books/2"
 					},
 					"response": []
 				},
@@ -69,7 +69,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2OTY2OTc3LCJpYXQiOjE2OTY5NjUxNzd9._MkYWMCQhHV7jyXhL7lwunWRhI6QfVjKow0xkzO_U_A"
 							}
 						},
 						"method": "PUT",
@@ -83,7 +83,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8765/books/4"
+						"url": "http://localhost:8765/books/6"
 					},
 					"response": []
 				},
@@ -93,12 +93,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzQyNTIyLCJpYXQiOjE2OTYzNDA3MjJ9.gkbS1j64MKasu5bDLzeDE4zNeoA7Z2iJ9zKfbeIo9jk"
 							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8765/books/4"
+						"url": "http://localhost:8765/books/20"
 					},
 					"response": []
 				},
@@ -108,7 +108,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk2MzM4MzEyLCJpYXQiOjE2OTYzMzY1MTJ9.lFzkQ7wGR7gyKDWc3KfLMSUSue63tTdbzahHD5fvPLk"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDEwOTcwLCJpYXQiOjE2OTcwMDkxNzB9.hHbQOmJ7ksSSrIyp1ykBDFkqQo0R_Lq0NM3i6Vd0u9o"
 							}
 						},
 						"method": "GET",
@@ -123,12 +123,12 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNb2RzZW4iLCJsb2dpbiI6Ik1hdHRoZXciLCJleHAiOjE2OTYzMTY4NDAsImlhdCI6MTY5NjMxNTA0MH0.RbHP2Ae7jx8JpseyDgiyuLyc1QM92jRS_7z-DdmhS60"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDEwOTcwLCJpYXQiOjE2OTcwMDkxNzB9.hHbQOmJ7ksSSrIyp1ykBDFkqQo0R_Lq0NM3i6Vd0u9o"
 							}
 						},
 						"method": "POST",
 						"header": [],
-						"url": "http://localhost:8765/books/take/3"
+						"url": "http://localhost:8765/books/take/6"
 					},
 					"response": []
 				},
@@ -138,12 +138,27 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNb2RzZW4iLCJsb2dpbiI6Ik1hdHRoZXciLCJleHAiOjE2OTYzMTY4NDAsImlhdCI6MTY5NjMxNTA0MH0.RbHP2Ae7jx8JpseyDgiyuLyc1QM92jRS_7z-DdmhS60"
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDE4ODA4LCJpYXQiOjE2OTcwMTcwMDh9.PnYJ8aW9u8W8avYcjePBiApCsMlS53xmBY7aDdGx_qA"
 							}
 						},
 						"method": "POST",
 						"header": [],
-						"url": "http://localhost:8765/books/return/2"
+						"url": "http://localhost:8765/books/return/7"
+					},
+					"response": []
+				},
+				{
+					"name": "getFreeBooks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIGRldGFpbHMiLCJpc3MiOiJNYXR0aGV3IiwibG9naW4iOiJNYXR0aGV3IiwiZXhwIjoxNjk3MDE4ODA4LCJpYXQiOjE2OTcwMTcwMDh9.PnYJ8aW9u8W8avYcjePBiApCsMlS53xmBY7aDdGx_qA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8765/books/free"
 					},
 					"response": []
 				}
@@ -159,7 +174,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\" : \"Matthew22\",\r\n    \"password\": \"1111\" \r\n}",
+							"raw": "{\r\n    \"login\" : \"45451sdssddswe\",\r\n    \"password\": \"1111\" \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
